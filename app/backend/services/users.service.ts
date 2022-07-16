@@ -13,6 +13,11 @@ class UsersService {
     const users = await this.model.getAll();
     return users;
   }
+
+  public async getByCpf(cpf: number): Promise<User> {
+    const user = await this.model.getByCpf(cpf);
+    return user;
+  }
 }
 
 export default UsersService;

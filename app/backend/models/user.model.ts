@@ -15,6 +15,14 @@ export default class UserModel {
     return rows as User[];
   }
 
+  public async getByCpf(cpf: number): Promise<User> {
+    const result = await this.connection
+      .execute('SELECT * FROM Users WHERE cpf=?', [cpf]);
+    const [rows] = result;
+    const [user] = rows as User[];
+    return user;
+  }
+
   public async create(user: User): Promise<User> {
     const { nome,
         sobrenome,

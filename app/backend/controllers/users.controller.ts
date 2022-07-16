@@ -9,6 +9,18 @@ class UsersController {
     const users = await this.userService.getAll();
     res.status(StatusCodes.OK).json(users);
   };
+
+  public getByCpf = async (req: Request, res: Response) => {
+    const cpf = parseInt(req.params.cpf);
+    const user = await this.userService.getByCpf(cpf);
+
+    if (!user) {
+      return res.status(StatusCodes.NOT_FOUND)
+        .json({ message: 'CPF não cadastrado!'});
+    }
+
+    res.status(StatusCodes.OK).json(user);
+  }
 }
 
 export default UsersController;
