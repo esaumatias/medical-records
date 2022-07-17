@@ -57,4 +57,37 @@ export default class UserModel {
     const { insertId } = dataInserted;
     return { id: insertId, ...user };
   }
+
+  public async update(id: number, user: User) {
+    const { nome,
+      sobrenome,
+      data_de_nascimento,
+      genero,
+      cpf,
+      rg,
+      uf_rg,
+      email,
+      celular,
+      telefone_fixo,
+      convenio,
+      carteirinha_do_convenio,
+      validade } = user;
+    await this.connection.execute(
+      'UPDATE Users SET nome=? ,sobrenome=? ,data_de_nascimento=? ,genero=? ,cpf=? ,rg=? ,uf_rg=? ,email=? ,celular=? ,telefone_fixo=? ,convenio=? ,carteirinha_do_convenio=? ,validade=?',
+      [nome,
+        sobrenome,
+        data_de_nascimento,
+        genero,
+        cpf,
+        rg,
+        uf_rg,
+        email,
+        celular,
+        telefone_fixo,
+        convenio,
+        carteirinha_do_convenio,
+        validade,
+        id]
+    );
+  }
 }

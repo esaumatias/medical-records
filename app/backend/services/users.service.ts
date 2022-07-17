@@ -1,6 +1,7 @@
 import connection from '../models/connection';
 import UserModel from '../models/user.model';
 import User from '../interfaces/User.interface';
+import { NotFoundError } from 'restify-errors';
 
 class UsersService {
   public model: UserModel;
@@ -21,6 +22,10 @@ class UsersService {
 
   public create(user: User): Promise<User> {
     return this.model.create(user);
+  }
+
+  public async update(id: number, user: User): Promise<void> {
+    return this.model.update(id, user);
   }
 }
 

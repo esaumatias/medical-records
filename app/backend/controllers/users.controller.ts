@@ -35,6 +35,22 @@ class UsersController {
 
     res.status(StatusCodes.CREATED).json(userCreated);
   }
+
+  public update = async (req: Request, res: Response) => {
+    const id = Number(req.params.id);
+    const user = req.body;
+    const userUpdate = await this.userService.update(id, user);
+    const cpf = parseInt(req.params.cpf);
+    const userCpf = await this.userService.getByCpf(cpf);
+    
+
+    if (!userCpf) {
+      return res.status(StatusCodes.NOT_FOUND)
+        .json({ message: 'CPF não está cadastrado!'});
+    }
+
+    res.status(StatusCodes.CREATED).json(userUpdate);
+  };
 }
 
 export default UsersController;

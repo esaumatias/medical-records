@@ -9,5 +9,6 @@ const usersController = new UsersController();
 router.get('/users', usersController.getAll);
 router.get('/users/:cpf', usersController.getByCpf);
 router.post('/users', validationUser, usersController.create);
+router.put('/users/:cpf', validationUser, usersController.update);
 
 export default router;
