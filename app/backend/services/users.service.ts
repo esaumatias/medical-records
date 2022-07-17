@@ -18,6 +18,10 @@ class UsersService {
     const user = await this.model.getByCpf(cpf);
     return user;
   }
+
+  public create(user: User): Promise<User> {
+    return this.model.create(user);
+  }
 }
 
 export default UsersService;

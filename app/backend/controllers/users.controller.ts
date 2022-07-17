@@ -21,6 +21,20 @@ class UsersController {
 
     res.status(StatusCodes.OK).json(user);
   }
+
+  public create = async (req: Request, res: Response) => {
+    const user = req.body;
+    const cpf = parseInt(req.params.cpf);
+    const userCpf = await this.userService.getByCpf(cpf);
+    const userCreated = await this.userService.create(user);
+
+    if (userCpf) {
+      return res.status(StatusCodes.NOT_FOUND)
+        .json({ message: 'CPF ja está cadastrado!'});
+    }
+
+    res.status(StatusCodes.CREATED).json(userCreated);
+  }
 }
 
 export default UsersController;
